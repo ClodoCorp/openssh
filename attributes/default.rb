@@ -45,12 +45,18 @@ default['openssh']['config_mode'] = case node['platform_family']
                                     else
                                       '0644'
                                     end
+default['openssh']['config_dir'] = case node['platform_family']
+                                   when 'alt'
+                                     '/etc/openssh'
+                                   else
+                                     '/etc/ssh'
+                                   end
 
 # ssh config group
 default['openssh']['client']['host'] = '*'
 
 # Workaround for CVE-2016-0777 and CVE-2016-0778
-default['openssh']['client']['use_roaming'] = 'no'
+# default['openssh']['client']['use_roaming'] = 'no'
 # default['openssh']['client']['forward_agent'] = 'no'
 # default['openssh']['client']['forward_x11'] = 'no'
 # default['openssh']['client']['rhosts_rsa_authentication'] = 'no'

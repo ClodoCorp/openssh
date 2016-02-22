@@ -26,7 +26,7 @@ node['openssh']['package_name'].each do |name|
   package name
 end
 
-template '/etc/ssh/ssh_config' do
+template "#{node['openssh']['config_dir']}/ssh_config" do
   source 'ssh_config.erb'
   mode '0644'
   owner 'root'
@@ -43,7 +43,7 @@ if node['openssh']['listen_interfaces']
   node.set['openssh']['server']['listen_address'] = listen_addresses
 end
 
-template '/etc/ssh/sshd_config' do
+template "#{node['openssh']['config_dir']}/sshd_config" do
   source 'sshd_config.erb'
   mode   node['openssh']['config_mode']
   owner  'root'
